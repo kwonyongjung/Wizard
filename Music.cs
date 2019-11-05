@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 class Music
 {
+    //참조추가탭 -> COM탭 -> Windows.MediaPlayer 참조 추가
+    //참조추가된 MediaPlayer의 속성에 들어가서 InterOP를 true에서 false로 변경
     MediaPlayer.MediaPlayerClass Start;
     MediaPlayer.MediaPlayerClass Ending;
     MediaPlayer.MediaPlayerClass Die;

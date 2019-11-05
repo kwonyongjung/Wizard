@@ -154,10 +154,6 @@ class Unit
                     m_vcPos.y += m_vcDir.y * m_fSpeed;
                 }
                 break;
-            default:
-                Console.WriteLine("arg error");
-                a_eDir = eDir.None;
-                break;
         }
     }
 

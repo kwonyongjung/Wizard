@@ -13,14 +13,20 @@ class Scene1 : Scene
     }
     Hero user = new Hero(1, new Vec2(5f,5f), new Vec2(1, 1));
     Skill s = new Fire(eSkillType.Fire, new Vec2(16f,16f),new Vec2(1,1), 'f');
+    Rock[] rocks = null;
     Unit[] monsters = null;
-    Map[] arrObj = null;
+    Object[] arrObj = null;
     Item[] items = null;
     Monster Boss = new Monster(103, new Vec2(20f, 15f), new Vec2(1, 1));
+    Random ran = new Random();
     private void Init()
     {
-
-        arrObj = new Map[]
+        rocks = new Rock[]
+        {
+            new Rock(eObjectType.Rock,30,14,'@'),
+            new Rock(eObjectType.Rock,30,15,'@'),
+        };
+        arrObj = new Object[]
         {
             new Wall(eObjectType.Wall, 0, 0, '#'),new Wall(eObjectType.Wall, 1, 0, '#'),new Wall(eObjectType.Wall, 2, 0, '#'),new Wall(eObjectType.Wall, 3, 0, '#'),new Wall(eObjectType.Wall, 4, 0, '#'),new Wall(eObjectType.Wall, 5, 0, '#'),new Wall(eObjectType.Wall, 6, 0, '#'),new Wall(eObjectType.Wall, 7, 0, '#'),new Wall(eObjectType.Wall, 8, 0, '#'),new Wall(eObjectType.Wall, 9, 0, '#'),new Wall(eObjectType.Wall, 10, 0, '#'),new Wall(eObjectType.Wall, 11, 0, '#'),new Wall(eObjectType.Wall, 12, 0, '#'),new Wall(eObjectType.Wall, 13, 0, '#'),new Wall(eObjectType.Wall, 14, 0, '#'),new Wall(eObjectType.Wall, 15, 0, '#'),new Wall(eObjectType.Wall, 16, 0, '#'),new Wall(eObjectType.Wall, 17, 0, '#'),new Wall(eObjectType.Wall, 18, 0, '#'),new Wall(eObjectType.Wall, 19, 0, '#'),new Wall(eObjectType.Wall, 20, 0, '#'),new Wall(eObjectType.Wall, 21, 0, '#'),new Wall(eObjectType.Wall, 22, 0, '#'),new Wall(eObjectType.Wall, 23, 0, '#'),new Wall(eObjectType.Wall, 24, 0, '#'),new Wall(eObjectType.Wall, 25, 0, '#'),new Wall(eObjectType.Wall, 26, 0, '#'),new Wall(eObjectType.Wall, 27, 0, '#'),new Wall(eObjectType.Wall, 28, 0, '#'),new Wall(eObjectType.Wall, 29, 0, '#'),new Wall(eObjectType.Wall, 30, 0, '#'),new Wall(eObjectType.Wall, 31, 0, '#'),new Wall(eObjectType.Wall, 32, 0, '#'),new Wall(eObjectType.Wall, 33, 0, '#'),new Wall(eObjectType.Wall, 34, 0, '#'),new Wall(eObjectType.Wall, 35, 0, '#'),new Wall(eObjectType.Wall, 36, 0, '#'),new Wall(eObjectType.Wall, 37, 0, '#'),new Wall(eObjectType.Wall, 38, 0, '#'),new Wall(eObjectType.Wall, 39, 0, '#'),new Wall(eObjectType.Wall, 40, 0, '#'),new Wall(eObjectType.Wall, 41, 0, '#'),new Wall(eObjectType.Wall, 42, 0, '#'),new Wall(eObjectType.Wall, 43, 0, '#'),new Wall(eObjectType.Wall, 44, 0, '#'),new Wall(eObjectType.Wall, 45, 0, '#'),new Wall(eObjectType.Wall, 46, 0, '#'),new Wall(eObjectType.Wall, 47, 0, '#'),new Wall(eObjectType.Wall, 48, 0, '#'),new Wall(eObjectType.Wall, 49, 0, '#'),new Wall(eObjectType.Wall, 50, 0, '#'),new Wall(eObjectType.Wall, 51, 0, '#'),new Wall(eObjectType.Wall, 52, 0, '#'),new Wall(eObjectType.Wall, 53, 0, '#'),new Wall(eObjectType.Wall, 54, 0, '#'),new Wall(eObjectType.Wall, 55, 0, '#'),new Wall(eObjectType.Wall, 56, 0, '#'),new Wall(eObjectType.Wall, 57, 0, '#'),new Wall(eObjectType.Wall, 58, 0, '#'),new Wall(eObjectType.Wall, 59, 0, '#'),new Wall(eObjectType.Wall, 60, 0, '#'),new Wall(eObjectType.Wall, 61, 0, '#'),new Wall(eObjectType.Wall, 62, 0, '#'),new Wall(eObjectType.Wall, 63, 0, '#'),new Wall(eObjectType.Wall, 64, 0, '#'),new Wall(eObjectType.Wall, 65, 0, '#'),new Wall(eObjectType.Wall, 66, 0, '#'),new Wall(eObjectType.Wall, 67, 0, '#'),new Wall(eObjectType.Wall, 68, 0, '#'),new Wall(eObjectType.Wall, 69, 0, '#'),new Wall(eObjectType.Wall, 70, 0, '#'),new Wall(eObjectType.Wall, 71, 0, '#'),new Wall(eObjectType.Wall, 72, 0, '#'),new Wall(eObjectType.Wall, 73, 0, '#'),new Wall(eObjectType.Wall, 74, 0, '#'),new Wall(eObjectType.Wall, 75, 0, '#'),new Wall(eObjectType.Wall, 76, 0, '#'),new Wall(eObjectType.Wall, 77, 0, '#'),new Wall(eObjectType.Wall, 78, 0, '#'),new Wall(eObjectType.Wall, 79, 0, '#'),new Wall(eObjectType.Wall, 80, 0, '#'),new Wall(eObjectType.Wall, 81, 0, '#'),new Wall(eObjectType.Wall, 82, 0, '#'),new Wall(eObjectType.Wall, 83, 0, '#'),new Wall(eObjectType.Wall, 84, 0, '#'),new Wall(eObjectType.Wall, 85, 0, '#'),new Wall(eObjectType.Wall, 86, 0, '#'),new Wall(eObjectType.Wall, 87, 0, '#'),new Wall(eObjectType.Wall, 88, 0, '#'),new Wall(eObjectType.Wall, 89, 0, '#'),new Wall(eObjectType.Wall, 90, 0, '#'),
             new Wall(eObjectType.Wall, 0, 1, '#'),new WaterWall(eObjectType.WaterWall,3,3, ' '),new Wall(eObjectType.Wall, 90, 1, '#'),
@@ -86,6 +92,9 @@ class Scene1 : Scene
     public override int Update(float a_fDelta)
     {
         eDir eDir = eDir.None;
+        eDir eDirM = eDir.None;
+        Console.SetCursorPosition(30, 40);
+        Console.WriteLine(a_fDelta);
 
         if (eKey.Left.IsKeyDown() == true)
         {
@@ -113,8 +122,14 @@ class Scene1 : Scene
             s.Update(user, a_fDelta);
         }
 
+
         if (eDir != eDir.None)
         {
+            foreach (var temp in monsters)
+            {
+                eDirM = (eDir)ran.Next();
+                temp.Move(eDirM);
+            }
             user.Update(eDir);
         }
 
@@ -128,6 +143,8 @@ class Scene1 : Scene
     public override void Render()
     {
         UIRender();
+        foreach (var temp in rocks)
+            temp.Render();
         foreach (var temp in arrObj)
             temp.Render();
         foreach (var temp in items)
@@ -141,6 +158,13 @@ class Scene1 : Scene
 
     public override void Interaction()
     {
+        foreach(var temp in rocks)
+        {
+            foreach (var temp1 in arrObj)
+                temp.InteractionWall(temp1);
+        }
+        foreach (var temp in rocks)
+            temp.Interaction(user);
         foreach (var temp in arrObj)
             temp.Interaction(user);
         foreach (var temp in items)

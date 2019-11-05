@@ -26,15 +26,15 @@ class TableManager
     public Dictionary<eSkillType, SkillTable> m_mapSkillTb = new Dictionary<eSkillType, SkillTable>();
     private TableManager()
     {
-        m_mapUnitTb.Add(1, new UnitTable(1, "법사", 10, 5, 100, 0.25f, 'M'));
-        m_mapUnitTb.Add(2, new UnitTable(2, "전사", 8, 8, 150, 0.25f, 'W'));
-        m_mapUnitTb.Add(101, new UnitTable(101, "오크", 10, 3, 50, 0.25f, 'o'));
-        m_mapUnitTb.Add(102, new UnitTable(102, "오거", 15, 5, 100, 0.25f, 'O'));
-        m_mapUnitTb.Add(103, new UnitTable(103, "보스", 15, 5, 100, 0.25f, 'B'));
+        m_mapUnitTb.Add(1, new UnitTable(1, "법사", 10, 5, 100, 0.1f, 'M'));
+        m_mapUnitTb.Add(2, new UnitTable(2, "전사", 8, 8, 150, 0.1f, 'W'));
+        m_mapUnitTb.Add(101, new UnitTable(101, "오크", 10, 3, 50, 1f, 'o'));
+        m_mapUnitTb.Add(102, new UnitTable(102, "오거", 15, 5, 100, 1f, 'O'));
+        m_mapUnitTb.Add(103, new UnitTable(103, "보스", 15, 5, 100, 1f, 'B'));
 
         m_mapObjTb.Add(eObjectType.Wall, new ObjectTable(eObjectType.Wall, 0, 1000, 600));
         m_mapObjTb.Add(eObjectType.WaterWall, new ObjectTable(eObjectType.WaterWall, 0, 0, 0));
-        m_mapObjTb.Add(eObjectType.FireWall, new ObjectTable(eObjectType.FireWall, 0, 0, 10));
+        m_mapObjTb.Add(eObjectType.FireWall, new ObjectTable(eObjectType.FireWall, 0, 0, 3));
 
         m_mapItemTb.Add(eItemType.HPUp, new ItemTable(eItemType.HPUp,0,0,100));
         m_mapItemTb.Add(eItemType.PowUp, new ItemTable(eItemType.PowUp, 20, 0, 0));

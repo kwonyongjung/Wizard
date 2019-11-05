@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class WaterWall : Map
+class WaterWall : Object
 {
     public WaterWall(eObjectType a_eType, int a_nX, int a_nY, char a_cRender) : base(a_eType, a_nX, a_nY, a_cRender) { }
 

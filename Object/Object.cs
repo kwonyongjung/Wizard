@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Map
+class Object
 {
     public int m_nX;
     public int m_nY;
     public char m_cRender;
     public eObjectType m_eType;
     public bool bExist = true;
-    public Map(eObjectType a_eType, int a_nX, int a_nY, char a_cRender)
+    public Object(eObjectType a_eType, int a_nX, int a_nY, char a_cRender)
     {
         m_eType = a_eType;
         m_nX = a_nX;
@@ -31,6 +31,7 @@ class Map
 
     public virtual void Interaction(Unit u)
     {
+        if (bExist == false) { return; }
         if (m_nX != (int)u.m_vcPos.x || m_nY != (int)u.m_vcPos.y) { return; }
         if (u.LastMove == eDir.None) { return; }
 

@@ -11,8 +11,6 @@ class UnitTable : ICalcStat
     public int m_nPow;
     public int m_nDef;
     public int m_nHP;
-    public Vec2 m_vcPos;
-    public Vec2 m_vcDir;
     public float m_fSpeed;
     public char m_cRender;
 
